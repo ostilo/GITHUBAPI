@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GithubSearch</string>
+    <string name="home">Home</string>
+    <string name="repositories">Repositories</string>
+    <string name="users">Users</string>
+    <string name="search">Search</string>
+    <string name="repo_place_holder">Search for repositories…</string>
+    <string name="search_empty_message">Search value cannot be empty</string>
+    <string name="search_repo_message">Search Github for repositories, issues and \n pull requests!</string>
+</resources>
