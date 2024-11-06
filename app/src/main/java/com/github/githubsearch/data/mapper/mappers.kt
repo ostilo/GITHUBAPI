@@ -18,7 +18,7 @@ fun RepositoryDto.toDomains() = Repository(
     repoName = fullName,
     starred = stargazersCount.toString(),
     languageName = language,
-    watchers = watchers.toString(),
+    issuesDisplayed = openIssues.toString(),
     topics = topics
 )
 

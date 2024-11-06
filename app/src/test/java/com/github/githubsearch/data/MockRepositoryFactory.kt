@@ -24,7 +24,7 @@ object MockRepositoryFactory {
         private = false,
         stargazersCount = 14421,
         language = "Kotlin",
-        watchers = 14421,
+        openIssues = 14421,
         topics = listOf("android", "java", "kotlin")
     )
 

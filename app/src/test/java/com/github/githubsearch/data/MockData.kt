@@ -25,7 +25,7 @@ val mockRepository = Repository(
     ownerAvatarUrl = "https://avatars.githubusercontent.com/u/23095877?v=4",
     description = "The most complete and advanced IT security professional toolkit on Android",
     starred = "14421",
-    watchers = "14421",
+    issuesDisplayed = "14421",
     languageName = "Kotlin",
     topics = listOf("android", "java", "kotlin")
 )
@@ -40,7 +40,7 @@ val mockRepositoryDto = RepositoryDto(
         private = false,
         stargazersCount = 14421,
         language = "Kotlin",
-        watchers = 14421,
+        openIssues = 14421,
         topics = listOf("android", "java", "kotlin")
     )
 

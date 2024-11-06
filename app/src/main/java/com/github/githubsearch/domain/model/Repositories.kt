@@ -7,7 +7,7 @@ data class Repository(
     val ownerAvatarUrl: String?,
     val description: String?,
     val starred: String?,
-    val watchers: String?,
+    val issuesDisplayed: String?,
     val languageName: String?,
-   val topics : List<String>
+    val topics : List<String>
 )

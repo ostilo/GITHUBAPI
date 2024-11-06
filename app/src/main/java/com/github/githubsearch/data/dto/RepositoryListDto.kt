@@ -13,7 +13,7 @@ data class RepositoryDto(
     val description: String = "",
     @SerializedName("stargazers_count")  val stargazersCount: Int,
     val language: String= "",
-    val watchers: Int = 0,
+    @SerializedName("open_issues")  val openIssues : Int = 0,
     val topics : List<String> = arrayListOf()
 )
 
