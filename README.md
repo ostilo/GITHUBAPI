@@ -1,6 +1,6 @@
 # Searching Github repositories and getting user’s info.
 
-## The project demostrate the use of modern Jetpack Compose, MVMM, Clean Architecture, Unit testing, Koin, and Navigation.
+## The project demostrates the use of modern Jetpack Compose, MVMM, Clean Architecture, Unit testing, Koin, and Navigation.
 
 ## Guidelines
 1. Check the master branch to get the updated code
