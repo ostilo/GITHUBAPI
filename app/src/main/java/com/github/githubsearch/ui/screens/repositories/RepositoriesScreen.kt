@@ -176,10 +176,28 @@ fun RepoContent(repo : Repository){
                             modifier = Modifier.padding(start = Dimens.dp10),
                             painter = painterResource(id = R.drawable.ic_language_point),
                             contentDescription = stringResource(R.string.stars),
-                            tint = Color.Unspecified  // This removes the tint
+                            tint = Color.Unspecified
                         )
                         Text(
-                            text = repo.languageName.orEmpty(),
+                            text = repo.languageName,
+                            modifier = Modifier.padding(start = Dimens.dp2),
+                            fontWeight = FontWeight.W400,
+                            color = PrimaryColor,
+                            fontSize =  Dimens.sp10,
+                            fontFamily = manRopeFontFamily,
+                            overflow = TextOverflow.Clip
+                        )
+                    }
+
+                    if(repo.issuesDisplayed?.isNotEmpty() == true){
+                        Icon(
+                            modifier = Modifier.padding(start = Dimens.dp10),
+                            painter = painterResource(id = R.drawable.ic_language_point),
+                            contentDescription = stringResource(R.string.app_name),
+                            tint = Color.Unspecified
+                        )
+                        Text(
+                            text = repo.issuesDisplayed,
                             modifier = Modifier.padding(start = Dimens.dp2),
                             fontWeight = FontWeight.W400,
                             color = PrimaryColor,
