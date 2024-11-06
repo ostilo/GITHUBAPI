@@ -5,16 +5,6 @@
 ## Guidelines
 1. Check the master branch to get the updated code
    
-3. The `GITHUB_API_KEY` token used in the project is
-
-`GITHUB_API_KEY = "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"`
-
-2. The `GITHUB_API_BASE_URL` base api url used in the project is
-
-`GITHUB_API_BASE_URL = "https://api.github.com"`
-
-
-  
 ## App's Features
 
 **Repository Screen**
