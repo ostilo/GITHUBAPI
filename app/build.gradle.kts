@@ -23,7 +23,7 @@ android {
         }
 
         buildConfigField ("String",  "GITHUB_API_BASE_URL", "\"https://api.github.com\"")
-        buildConfigField ("String",  "GITHUB_API_KEY",  "\"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\"")
+        buildConfigField ("String",  "GITHUB_API_KEY",  "\"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\"")
 
 
 
