@@ -1,12 +1,4 @@
 package com.github.githubsearch.ui.navigation
 
-import androidx.navigation.NavOptionsBuilder
-
+/* Interface to specify the screen navigation names*/
 interface Route
-
-fun NavOptionsBuilder.navOptions(route: Route, include: Boolean = true) {
-    popUpTo(route){
-        inclusive = include
-    }
-    launchSingleTop = true
-}

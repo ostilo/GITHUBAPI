@@ -23,7 +23,7 @@ android {
         }
 
         buildConfigField ("String",  "GITHUB_API_BASE_URL", "\"https://api.github.com\"")
-        buildConfigField ("String",  "GITHUB_API_KEY", "\"https://api.github.com\"")
+        buildConfigField ("String",  "GITHUB_API_KEY",  "\"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\"")
 
 
 
@@ -51,9 +51,18 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
     packaging {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-notice.md")
+            excludes.add("META-INF/LICENSE.txt")
+            excludes.add("META-INF/LICENSE")
+            excludes.add("META-INF/NOTICE.txt")
+            excludes.add("META-INF/NOTICE")
+            excludes.add("META-INF/DEPENDENCIES")
+            excludes.add("META-INF/AL2.0")
+            excludes.add("META-INF/LGPL2.1")
         }
     }
 }
@@ -101,13 +110,29 @@ dependencies {
     // Gson
     implementation(libs.gson)
 
+    // retrofit
     implementation(libs.squareup.retrofit2.retrofit)
 
+    // retrofit gson converter
     implementation(libs.squareup.retrofit2.converter)
 
+    // Request/Response logging
     implementation(libs.okhttp3.logging)
 
-//    implementation(libs.io.mockk)
+    // okhttp3
+    implementation(libs.okhttp3)
+
+    // mockk to unit testing
+    implementation(libs.io.mockk.mockk)
+
+    // Coil - Image Url loading
+    implementation(libs.coil.compose)
+
+    // Coroutines - Unit test
+    implementation(libs.coroutines.test)
+
+    // Coroutines - Android SDK
+    implementation(libs.coroutines.android)
 
 
 

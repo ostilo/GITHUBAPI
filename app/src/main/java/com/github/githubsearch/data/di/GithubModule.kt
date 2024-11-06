@@ -2,12 +2,18 @@ package com.github.githubsearch.data.di
 
 import com.github.githubsearch.BuildConfig
 import com.github.githubsearch.data.api.RepoApiService
+import com.github.githubsearch.data.api.UserApiService
 import com.github.githubsearch.data.repository.RepoRepositoryImpl
+import com.github.githubsearch.data.repository.UserRepositoryImpl
 import com.github.githubsearch.domain.repository.RepoRepository
+import com.github.githubsearch.domain.repository.UsersRepository
 import com.github.githubsearch.domain.usecase.GetAllRepositoryUseCase
+import com.github.githubsearch.domain.usecase.GetAllUsersUseCase
 import com.github.githubsearch.ui.screens.mainapp.MainAppViewState
 import com.github.githubsearch.ui.screens.mainapp.SharedViewModel
 import com.github.githubsearch.ui.screens.repositories.RepositoriesViewModel
+import com.github.githubsearch.ui.screens.user.UsersViewModel
+import com.github.githubsearch.ui.screens.user.details.UserDetailsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -16,16 +22,21 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
+/* APP DI module, to be used as a koin module  */
 val githubModule = module {
 
-    viewModel { SharedViewModel( get()) }
 
+
+    viewModel { SharedViewModel( get()) }
     viewModel { RepositoriesViewModel( get()) }
+    viewModel { UsersViewModel( get()) }
+    viewModel { UserDetailsViewModel( get()) }
+
 
     single { MainAppViewState() }
-
     single { GetAllRepositoryUseCase(get()) }
+    single { GetAllUsersUseCase(get()) }
+
 
     // OkHttpClient
     single {
@@ -41,7 +52,7 @@ val githubModule = module {
                 val original = chain.request()
                 val request = original.newBuilder()
                     .header("Accept", "application/json")
-                    //.header("Authorization", "Bearer ${BuildConfig.GITHUB_API_KEY}")
+                    .header("Authorization", BuildConfig.GITHUB_API_KEY)
                     .method(original.method, original.body)
                     .build()
                 chain.proceed(request)
@@ -66,5 +77,13 @@ val githubModule = module {
 
     single<RepoRepository> {
         RepoRepositoryImpl(get())
+    }
+
+    single<UsersRepository> {
+        UserRepositoryImpl(get())
+    }
+
+    single {
+        get<Retrofit>().create(UserApiService::class.java)
     }
 }

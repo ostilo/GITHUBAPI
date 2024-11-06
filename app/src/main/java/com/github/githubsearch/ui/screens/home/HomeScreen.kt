@@ -27,6 +27,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
 import com.github.githubsearch.R
+import com.github.githubsearch.domain.model.Users
 import com.github.githubsearch.ui.navigation.GithubScreens
 import com.github.githubsearch.ui.screens.mainapp.SharedViewModel
 import com.github.githubsearch.ui.theme.CardStroke
@@ -37,6 +38,7 @@ import com.github.githubsearch.ui.theme.UserCardColor
 import com.github.githubsearch.ui.theme.manRopeFontFamily
 import org.koin.androidx.compose.koinViewModel
 
+/* Home Screen */
 @Composable
 fun HomeScreen(navController: NavHostController) {
     Column(
@@ -67,7 +69,7 @@ fun HomeContainerCard(navController: NavHostController, sharedViewModel: SharedV
 
     Row(
         modifier = Modifier
-            .padding(top = Dimens.dp50)
+            .padding(top = Dimens.dp30)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -108,7 +110,7 @@ fun HomeContainerCard(navController: NavHostController, sharedViewModel: SharedV
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_user_outlined),
-                    contentDescription = "Users",
+                    contentDescription = stringResource(id = R.string.app_name),
                     modifier = Modifier
                         .size(Dimens.dp35)
                         .background(Color.White, RectangleShape)
@@ -136,7 +138,8 @@ fun HomeContainerCard(navController: NavHostController, sharedViewModel: SharedV
                     shape = RectangleShape
                 ).clickable {
                     sharedViewModel.updateTabIndex(1)
-                    navController.navigate(GithubScreens.RepositoriesScreen) }
+                    navController.navigate(GithubScreens.RepositoriesScreen)
+                }
             ,
             colors = CardDefaults.cardColors(
                 containerColor = RepoCardColor

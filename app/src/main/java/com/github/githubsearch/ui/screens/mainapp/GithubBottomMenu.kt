@@ -2,7 +2,6 @@ package com.github.githubsearch.ui.screens.mainapp
 import androidx.compose.foundation.indication
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleAlpha
 import androidx.compose.material.ripple.RippleTheme
@@ -14,11 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -65,7 +60,7 @@ fun GithubBottomMenu(navController: NavController, sharedViewModel: SharedViewMo
         modifier = Modifier.shadow(
             elevation = Dimens.dp10,
             spotColor = Color.Transparent,
-            ambientColor = Color.Red,
+            ambientColor = Color.Transparent,
             shape = RectangleShape
         )
     ) {

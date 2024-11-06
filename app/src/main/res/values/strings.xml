@@ -4,7 +4,23 @@
     <string name="repositories">Repositories</string>
     <string name="users">Users</string>
     <string name="search">Search</string>
-    <string name="repo_place_holder">Search for repositories…</string>
+    <string name="repo_place_holder">Search for repositories……</string>
+    <string name="user_place_holder">Search for users…</string>
     <string name="search_empty_message">Search value cannot be empty</string>
     <string name="search_repo_message">Search Github for repositories, issues and \n pull requests!</string>
+    <string name="searching_repo_message">Searching Github for repositories</string>
+    <string name="search_repo_failed_message">Search value doesn’t have repositories yet, come back later :-)</string>
+    <string name="search_repo_empty_message">We’ve searched the ends of the earth, repository not \n found, please try again</string>
+
+    <string name="search_user_message">Search Github for users…</string>
+    <string name="searching_user_message">Searching Github for users</string>
+<!--    <string name="search_repo_failed_message">Search value doesn’t have repositories yet, come back later :-)</string>-->
+    <string name="search_user_empty_message">We’ve searched the ends of the earth and we’ve not found this user, please try again</string>
+    <string name="search_user_repo_empty_msg">This user does’t have repositories yet, come back later :-)</string>
+    <string name="loading">Loading…</string>
+    <string name="stars">Stars</string>
+    <string name="follow_people_msg">{0} followers    .   {1} following</string>
+    <string name="following_msg">{0} following</string>
+    <string name="forked">Forked</string>
+    <string name="not_forked">Not Forked</string>
 </resources>

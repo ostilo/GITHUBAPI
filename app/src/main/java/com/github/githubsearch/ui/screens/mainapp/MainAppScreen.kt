@@ -20,6 +20,7 @@ fun MainAppScreen() {
 
     val navController = rememberNavController()
     Scaffold(
+        containerColor = Color.White,
         bottomBar = { GithubBottomMenu(navController = navController) }
     ) { padding ->
         Box(

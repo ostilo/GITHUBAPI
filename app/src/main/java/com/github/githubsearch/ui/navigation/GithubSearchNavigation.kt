@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.github.githubsearch.ui.screens.mainapp.MainAppScreen
 import com.github.githubsearch.ui.screens.splash.GithubSplashScreen
 
+/* Main App / Home  Navigation */
 @Composable
 fun GithubSearchNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = GithubScreens.SplashScreen) {

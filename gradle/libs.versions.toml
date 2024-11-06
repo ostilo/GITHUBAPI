@@ -16,7 +16,10 @@ serialization = "1.9.0"
 gson = "2.10.1"
 retrofit = "2.9.0"
 mockk = "1.13.3"
-okhttp3Logging = "4.2.1"
+okhttp3Logging = "4.9.0"
+coilCompose = "2.2.2"
+coroutinesVersion = "1.6.4"
+
 
 
 
@@ -50,6 +53,10 @@ squareup-retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrof
 squareup-retrofit2-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 io-mockk-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 okhttp3-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3Logging" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp3Logging" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coilCompose" }
+coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
+coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
 
 
 [plugins]

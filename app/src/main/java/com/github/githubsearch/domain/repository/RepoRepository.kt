@@ -5,5 +5,5 @@ import com.github.githubsearch.domain.model.Repository
 import com.github.githubsearch.core.Result
 
 interface RepoRepository {
-    suspend fun getAllRepositories(pageNo: Int, perPage:Int): Result<GitHubSearchResponse<Repository>>
+    suspend fun getAllRepositories(pageNo: Int, perPage:Int, searchCriteria: String): Result<GitHubSearchResponse<Repository>>
 }

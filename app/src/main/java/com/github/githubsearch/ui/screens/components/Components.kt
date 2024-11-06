@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
 
+/* UI component Utils */
 @Composable
 fun GithubSpacerHeight(dimen: Dp) {
     Spacer(modifier = Modifier.heightIn(dimen))
 }
-
 
 @Composable
 fun GithubSpacerWidth(dimen: Dp) {

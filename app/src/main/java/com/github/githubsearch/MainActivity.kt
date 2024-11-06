@@ -4,6 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,11 +21,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -36,6 +42,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -45,10 +54,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.github.githubsearch.core.Constants.PROGRESS_VALUE
 import com.github.githubsearch.ui.navigation.GithubSearchNavigation
 import com.github.githubsearch.ui.screens.components.GithubSpacerHeight
+import com.github.githubsearch.ui.theme.CardStroke
 import com.github.githubsearch.ui.theme.Dimens
 import com.github.githubsearch.ui.theme.FailedRedText
 import com.github.githubsearch.ui.theme.GithubSearchTheme
@@ -60,20 +75,21 @@ import com.github.githubsearch.ui.theme.manRopeFontFamily
 typealias ComposableFun = @Composable () -> Unit
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             GithubSearchTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = Color.White
                 ) {
                     GithubSearchingApp()
                 }
             }
         }
     }
+
 }
 
 @Composable
@@ -87,7 +103,7 @@ fun GithubSearchingApp(){
     }
 }
 
-
+/* To update app control color. */
 @Composable
 fun SetColorStatus(isLightStatusBars : Boolean, statusBarColor : Color){
     val view = LocalView.current
@@ -101,11 +117,13 @@ fun SetColorStatus(isLightStatusBars : Boolean, statusBarColor : Color){
 }
 
 
+/* A reusable composable function for repository and user composable screen */
 @Composable
 fun GithubSearchHeader(title : Int, placeHolder : Int, screen: ComposableFun, onSearchClicked: (String) -> Unit){
 
     var searchText by remember { mutableStateOf(TextFieldValue()) }
     var isError by remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
 
     Column(
         modifier = Modifier
@@ -146,6 +164,11 @@ fun GithubSearchHeader(title : Int, placeHolder : Int, screen: ComposableFun, on
 
             TextField(
                 value = searchText, // Replace with your state
+                textStyle = TextStyle(
+                    textDecoration = TextDecoration.None,
+                    fontFamily = manRopeFontFamily,
+                    fontWeight = FontWeight.Normal
+                ),
                 onValueChange = {
                   /* Handle value change */
                     searchText = it
@@ -170,13 +193,12 @@ fun GithubSearchHeader(title : Int, placeHolder : Int, screen: ComposableFun, on
                     focusedIndicatorColor = Color.Transparent,
                     unfocusedIndicatorColor = Color.Transparent,
                     cursorColor = PrimaryColor,
+                    disabledIndicatorColor = Color.Transparent
                 ),
                 singleLine = true,
                 maxLines = 1,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Done
-                )
+                keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done, keyboardType = KeyboardType.Password),
             )
 
             Button(
@@ -184,6 +206,7 @@ fun GithubSearchHeader(title : Int, placeHolder : Int, screen: ComposableFun, on
                         if(searchText.text.isEmpty()){
                             isError = true
                         }else{
+                            focusManager.clearFocus()
                             onSearchClicked(searchText.text)
                         }
                      },
@@ -228,10 +251,11 @@ fun GithubSearchHeader(title : Int, placeHolder : Int, screen: ComposableFun, on
     }
 }
 
-// Empty State
+
+/* A reusable composable function to show screen, app ,network state */
 
 @Composable
-fun DefaultSearchStateContent(title:Int){
+fun DefaultSearchStateContent(title:String, iconId : Int = R.drawable.ic_search_place_holder){
 
     Column {
         Box(
@@ -245,14 +269,14 @@ fun DefaultSearchStateContent(title:Int){
                 verticalArrangement = Arrangement.Center,
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_search_place_holder),
+                    painter = painterResource(id = iconId),
                     contentDescription = stringResource(id = R.string.app_name),
                 )
                 
                 GithubSpacerHeight(dimen = Dimens.dp20)
 
                 Text(
-                    text = stringResource(id = title),
+                    text = title,
                     fontWeight = FontWeight.W500,
                     style = TextStyle(
                         color = TextGray,
@@ -265,6 +289,101 @@ fun DefaultSearchStateContent(title:Int){
         }
     }
 
+}
+
+
+/* A loading composable for the app */
+@Composable
+fun LoaderScreen(title : Int) {
+    val infiniteTransition = rememberInfiniteTransition(label = stringResource(id = R.string.app_name))
+
+    val progressAnimationValue by infiniteTransition.animateFloat(
+        initialValue = 0.0f,
+        targetValue = PROGRESS_VALUE, animationSpec = infiniteRepeatable(animation = tween(900)),
+        label = ""
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            CircularProgressIndicator(
+                progress = progressAnimationValue,
+                color = PrimaryColor
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                modifier = Modifier.padding(start = Dimens.dp10),
+                text = stringResource(title),
+                fontSize = Dimens.sp14,
+                color = PrimaryColor,
+                fontFamily = manRopeFontFamily,
+            )
+        }
+    }
+}
+
+
+
+/* An image loader to load network images. */
+@Composable
+fun AdvancedNetworkImage(
+    imageUrl: String,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop
+) {
+    var isLoading by remember { mutableStateOf(true) }
+    var isError by remember { mutableStateOf(false) }
+
+    Box(modifier = modifier) {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(imageUrl)
+                .memoryCacheKey(imageUrl)  // Cache key
+                .diskCacheKey(imageUrl)    // Disk cache key
+                .crossfade(true)
+                .build(),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize(),
+            contentScale = contentScale,
+            onLoading = { isLoading = true },
+            onSuccess = { isLoading = false },
+            onError = {
+                isLoading = false
+                isError = true
+            }
+        )
+
+        // Loading shimmer effect
+        if (isLoading) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(CardStroke)
+            )
+        }
+
+        // Error state
+        if (isError) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Gray.copy(alpha = 0.1f))
+            ) {
+                Icon(
+                    painter= painterResource(id = R.drawable.ic_user_outlined),
+                    contentDescription = "Error",
+                    modifier = Modifier.align(Alignment.Center))
+            }
+        }
+    }
 }
 
 

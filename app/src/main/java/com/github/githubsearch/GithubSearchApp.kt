@@ -8,6 +8,7 @@ import org.koin.core.context.startKoin
 
 class GithubSearchApp : Application() {
 
+    /* App entry point, with koin DI */
     override fun onCreate() {
         super.onCreate()
         startKoin {
