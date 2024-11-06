@@ -3,8 +3,9 @@
 ## The project demostrate the use of modern Jetpack Compose, MVMM, Clean Architecture, Unit testing, Koin, and Navigation.
 
 ## Guidelines
-1. Check the master branch for `app` to get the updated code
-2. The `GITHUB_API_KEY` token used in the project is
+1. Check the master branch to get the updated code
+   
+3. The `GITHUB_API_KEY` token used in the project is
 
 `GITHUB_API_KEY = "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"`
 
@@ -16,7 +17,7 @@
   
 ## App's Features
 
-**Repository Screen - Search repos**
+**Repository Screen**
 This is where you can search for repositories on Github.
 
 **User screen**
