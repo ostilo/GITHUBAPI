@@ -26,6 +26,6 @@ This is where you can see more information on a users as well as there Repositor
 6. Navigation: A powerful navigation library for Android that simplifies the process of navigating between different screens in the app
 
 
-**Notes**
-Pagination not included in the current development, because Github would return a API rate limit error if a certain number of request were made within an hour.
-It was included before, but had to remove it, when I was experiencing the issue. 
+### Notes
+####  Pagination not included in the current development, because Github would return a API rate limit error if a certain number of request were made within an hour.
+####  It was included before, but had to remove it, when I was experiencing the issue. 
